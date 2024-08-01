@@ -61,6 +61,17 @@ function Incorrecto(){
 function Incorrecto(){
     alert("Alternativa Incorrecta")
 }
+function Incorrecto(){
+    alert("Alternativa Incorrecta")
+}
+
+function Incorrecto(){
+    alert("Alternativa Incorrecta")
+}
+
+function Incorrecto(){
+    alert("Alternativa Incorrecta")
+}
 
 
 
