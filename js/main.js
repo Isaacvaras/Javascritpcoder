@@ -55,6 +55,9 @@ else{
 function Incorrecto(){
     alert("Alternativa Incorrecta")
 }
+function Incorrecto(){
+    alert("Alternativa Incorrecta")
+}
 
 
 
