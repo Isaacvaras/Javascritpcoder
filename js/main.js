@@ -6,7 +6,10 @@ let PrecioTotalM = 0;
 let PrecioTotalD = 0;
 let PrecioTotalT = 0;
 
-alert("Bievenido al Hotel Puerto Varas aqui le generare su reserva")
+alert("Bievenido al Hotel Puerto Varas aqui le generare su reserva");
+
+
+
 
 class Reservas {
     constructor(Nombre,precio,Personas){
@@ -20,10 +23,11 @@ function Reservaciones(habitacionnombre,habitacionprecio){
     this.precio = habitacionprecio;
     
 }
-
+const Arrayhabitaciones = []
 let salir = true
 do {
     let Reserva = confirm("Desea Reservar una habitación?")
+    
     if(Reserva){
         let habitacion = prompt("Que habitacion quieres reservar? \n\ *Ponga el numero de la habitacion que desea reservar \n\ 1.Habitacion Matrimonial....150 soles \n\ 2.Habitacion Doble....200 soles \n\ 3.Habitacion triple....250 soles \n\ 4. Salir")
     if(habitacion == 1){
@@ -36,6 +40,7 @@ do {
         ReservasGeneradasM += 1;
         const nuevasReservacionesM = new Reservaciones("Habitacion Matrimonial",150)
         console.log(nuevasReservacionesM)
+        Arrayhabitaciones.push("Habitacion Matrimonial")
         
         
     }
@@ -48,6 +53,7 @@ do {
         ReservasGeneradasD += 1;
         const nuevasReservacionesD = new Reservaciones("Habitacion Doble",200)
         console.log(nuevasReservacionesD)
+        Arrayhabitaciones.push("Habitacion Doble")
         
     }
     else if(habitacion == 3){
@@ -59,6 +65,7 @@ do {
         ReservasGeneradasT += 1;
         const nuevasReservacionesT = new Reservaciones("Habitacion Triple",250)
         console.log(nuevasReservacionesT)
+        Arrayhabitaciones.push("Habitacion Triple")
     }
     else if(habitacion == 4){
     alert("No Se Reservo una Habitacion")
@@ -95,15 +102,18 @@ do {
 
 if (descuento){
     alert("Se Reservo "+ ReservasGeneradasM +" Habitaciones Matrimoniales" + " a "+ 150 + "   ....total:   " + PrecioTotalM + "\n\ Se Reservo "+ ReservasGeneradasD +" Habitaciones Dobles" + " a " + 200 + "   ....total:   "  + PrecioTotalD + 
-        "\n\ Se Reservo "+ ReservasGeneradasT +" Habitaciones Triples" + " a " + 300 + "   ....total:   "  + PrecioTotalT +"\n\ .....Precio total: " + (PrecioTotal * 0.80))
+        "\n\ Se Reservo "+ ReservasGeneradasT +" Habitaciones Triples" + " a " + 300 + "   ....total:   "  + PrecioTotalT +"\n\ .....Precio total: " + (PrecioTotal * 0.80));
+        console.log(Arrayhabitaciones)
 
 
 }
 else{
 
     alert("Se Reservo "+ ReservasGeneradasM +" Habitaciones Matrimoniales" + " a "+ 150 + "   ....total:   " + PrecioTotalM + "\n\ Se Reservo "+ ReservasGeneradasD +" Habitaciones Dobles" + " a " + 200 + "   ....total:   "  + PrecioTotalD + 
-    "\n\ Se Reservo "+ ReservasGeneradasT +" Habitaciones Triples" + " a " + 300 + "   ....total:   "  + PrecioTotalT +"\n\ .....Precio total: " + PrecioTotal)
+    "\n\ Se Reservo "+ ReservasGeneradasT +" Habitaciones Triples" + " a " + 300 + "   ....total:   "  + PrecioTotalT +"\n\ .....Precio total: " + PrecioTotal);
+    console.log(Arrayhabitaciones)
 }
+
 
 
 
