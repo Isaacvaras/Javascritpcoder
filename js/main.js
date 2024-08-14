@@ -1,134 +1,91 @@
-let ReservasGeneradasM = 0;
-let ReservasGeneradasD = 0;
-let ReservasGeneradasT = 0;
-let PrecioTotal = 0;
-let PrecioTotalM = 0;
-let PrecioTotalD = 0;
-let PrecioTotalT = 0;
-
-alert("Bievenido al Hotel Puerto Varas aqui le generare su reserva");
+const main = document.getElementById("container");
 
 
+let Reserva;
+
+if(localStorage.getItem("Reserva")){
+    Reserva = JSON.parse(localStorage.getItem("Reserva"));
+} else {
+    Reserva = [];
+};
+
+Habitacion.forEach(el => CrearCard(el));
+
+function agregarAlCarrito(Habitacion){
 
 
-class Reservas {
-    constructor(Nombre,precio,Personas){
-        this.nombre = Nombre;
-        this.precio = precio;
-        this.NumeroP = Personas;
+    if(Reserva.some(el => el.id === Habitacion.id)){
+        const HabitacionesIndex = Reserva.findIndex(el => el.id === Habitacion.id);
+        Reserva[HabitacionesIndex].cantidad += 1;
+
+    } else {
+        const nuevaReserva = {
+            id: Habitacion.id,
+            nombre: Habitacion.nombre,
+            precio: Habitacion.precio,
+            imagen: Habitacion.imagen,
+            cantidad: 1
+        };
+        Reserva.push(nuevaReserva);
     }
+    localStorage.setItem("Reserva", JSON.stringify(Reserva));
 }
-function Reservaciones(habitacionnombre,habitacionprecio){
-    this.nombre = habitacionnombre;
-    this.precio = habitacionprecio;
+
+
+function CrearCard(Habitacion){
     
-}
-const Arrayhabitaciones = []
-let salir = true
-do {
-    let Reserva = confirm("Desea Reservar una habitación?")
-    
-    if(Reserva){
-        let habitacion = prompt("Que habitacion quieres reservar? \n\ *Ponga el numero de la habitacion que desea reservar \n\ 1.Habitacion Matrimonial....150 soles \n\ 2.Habitacion Doble....200 soles \n\ 3.Habitacion triple....250 soles \n\ 4. Salir")
-    if(habitacion == 1){
-        i=1
-        const reservanueva = new Reservas("Habitacion Matrimonial",150,prompt("Cuantas Personas entraran en esta habitacion?"))
-        PrecioTotalM+= 150,
-        PrecioTotal+= 150,
-        
-        alert("Se Reservo Una Habitacion Matrimonial");
-        ReservasGeneradasM += 1;
-        const nuevasReservacionesM = new Reservaciones("Habitacion Matrimonial",150)
-        console.log(nuevasReservacionesM)
-        Arrayhabitaciones.push("Habitacion Matrimonial")
-        
-        
-    }
-    else if(habitacion == 2){
-        const reservanueva = new Reservas("Habitacion Doble",200,prompt("Cuantas Personas entraran en esta habitacion?"))
-        PrecioTotalD+= 200
-        PrecioTotal+= 200
-        
-        alert("Se Reservo Una Habitacion Doble");
-        ReservasGeneradasD += 1;
-        const nuevasReservacionesD = new Reservaciones("Habitacion Doble",200)
-        console.log(nuevasReservacionesD)
-        Arrayhabitaciones.push("Habitacion Doble")
-        
-    }
-    else if(habitacion == 3){
-        const reservanueva = new Reservas("Habitacion Triple",250,prompt("Cuantas Personas entraran en esta habitacion?"))
-        PrecioTotalT+= 250
-        PrecioTotal+= 250
-        
-        alert("Se Reservo Una Habitacion Triple");
-        ReservasGeneradasT += 1;
-        const nuevasReservacionesT = new Reservaciones("Habitacion Triple",250)
-        console.log(nuevasReservacionesT)
-        Arrayhabitaciones.push("Habitacion Triple")
-    }
-    else if(habitacion == 4){
-    alert("No Se Reservo una Habitacion")
-    }
-    else {
-    Incorrecto()
-    }
-    }
-        else {
-            salir = false;
-        }
-
-}while(salir)
-
-
-    descuento = false
-    let numerosuerte = prompt("Prueba tu suerte, asi se te dara un Descuento, sino aciertas no te preocupes se te cobara lo normal Escoge un numero del 1 al 5")
-
+    const card = document.createElement("div");
+    card.className = "card";
+    const Nombre = document.createElement("h3");
+    Nombre.innerText = Habitacion.nombre;
+    const Precio = document.createElement("p")
+    Precio.innerText = Habitacion.precio;
+    const Imagen = document.createElement("img")
+    Imagen.className = "Imagencard";
+    Imagen.src = Habitacion.imagen;
+    const boton = document.createElement("button");
+    boton.innerText = "Reservar";
+    boton.onclick = () => agregarAlCarrito(Habitacion);
     
 
-    const Suerte = Math.ceil(Math.random() * 5);
-    intento();
+    card.append(Nombre);
+    card.append(Precio);
+    card.append(Imagen);
+    card.append(boton)
+    main.append(card);
+    
+};
 
-    function intento(){
-        if(Suerte == numerosuerte){
-            alert("acertaste toma tu descuento del 20%")
-            descuento= true
-        }
-        else{
-            alert("Mayor suerte la proxima")
-        }
-    }
+const botonMostrar = document.createElement("button");
+botonMostrar.innerText = "Mostrar Reserva";
+botonMostrar.className = "Boton"
+botonMostrar.addEventListener("click", () => {
+    console.log("Estas son tus Habitaciones",Reserva)
+});
 
+main.append(botonMostrar);
 
-if (descuento){
-    alert("Se Reservo "+ ReservasGeneradasM +" Habitaciones Matrimoniales" + " a "+ 150 + "   ....total:   " + PrecioTotalM + "\n\ Se Reservo "+ ReservasGeneradasD +" Habitaciones Dobles" + " a " + 200 + "   ....total:   "  + PrecioTotalD + 
-        "\n\ Se Reservo "+ ReservasGeneradasT +" Habitaciones Triples" + " a " + 300 + "   ....total:   "  + PrecioTotalT +"\n\ .....Precio total: " + (PrecioTotal * 0.80));
-        console.log(Arrayhabitaciones)
+const botonLimpiar = document.createElement("button");
+botonLimpiar.className = "Boton"
+botonLimpiar.innerText = "Cancelar Reservas";
+botonLimpiar.addEventListener("click", () => {
+    Reserva = [];
+    localStorage.setItem("Reserva", JSON.stringify(Reserva))
+});
 
+main.append(botonLimpiar);
 
-}
-else{
+const botonLimpiar1 = document.createElement("button");
+botonLimpiar1.className = "Boton"
+botonLimpiar1.innerText = "Eliminar Ultima Reserva";
+botonLimpiar1.addEventListener("click", () => {
+    Reserva.shift();
+    localStorage.setItem("Reserva", JSON.stringify(Reserva))
+});
 
-    alert("Se Reservo "+ ReservasGeneradasM +" Habitaciones Matrimoniales" + " a "+ 150 + "   ....total:   " + PrecioTotalM + "\n\ Se Reservo "+ ReservasGeneradasD +" Habitaciones Dobles" + " a " + 200 + "   ....total:   "  + PrecioTotalD + 
-    "\n\ Se Reservo "+ ReservasGeneradasT +" Habitaciones Triples" + " a " + 300 + "   ....total:   "  + PrecioTotalT +"\n\ .....Precio total: " + PrecioTotal);
-    console.log(Arrayhabitaciones)
-}
-
-
-
-
-function Incorrecto(){
-    alert("Alternativa Incorrecta")
-}
-
-
-
-
-
-
-
-
-
+main.append(botonLimpiar1);
+  
+   
 
 
 

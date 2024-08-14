@@ -1,0 +1,24 @@
+*{
+    background-color: rgb(96, 96, 172);
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 60%;
+    border: solid black;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+}
+.Imagencard{
+    width: 200px;
+    height: 200px;
+}
+.Boton {
+    text-align: center;
+    margin: 10px auto;
+}
