@@ -74,14 +74,13 @@ botonMostrar.addEventListener("click", () => {
 });
 
 main.append(botonMostrar);
-
+localStorage.setItem("Reservaciones", JSON.stringify(Reserva));
 function MostrarReserva(){
     Swal.fire({
-        title: "Reservas Confirmadas",
-        html: Reserva,
-        icon: "info",
-        confirmButtonText: "Correcto"
-    });
+        title: "Habitaciones Reservadas",
+        text: localStorage.getItem("Reservaciones"),
+        icon: "success"
+      });
 }
 
 
