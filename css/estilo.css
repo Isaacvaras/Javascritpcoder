@@ -1,3 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+}
+button {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+}
+ul{
+    list-style-type: none;
+}
+body {
+    height: 100vh;
+    background-color: rgb(150, 199, 150);
+}
+header{
+    padding-block: 1rem;
+}
+.nav{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    padding-inline: 1rem;
+}
+.nav-list{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.logoheader{
+    width: 50%;
+}
+.btn-header {
+    background-color: rgb(254, 254, 254);
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 100vmax;
+    box-shadow: 0 0 1rem black;
+    font-weight: 600;
+    transition: 1s;
+}
+.btn-header:hover{
+    background-color: green;
+    color: black;
+    transform: scale(1.4);
+}
+main{
+    padding: 2rem;
+    max-width: 1500px;
+}
+.personaje-imagen{
+    padding-inline: 1rem;
+    display: flex;
+    justify-content: center;
+}
+.personaje-imagen img{
+    width: 100%;
+    max-width: 15rem;
+}
+.Personaje-info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5 rem;
+    padding-inline: 2rem;
+    align-items: center;
+    text-align: center;
+}
+.nombre-contenedor{
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+    flex-wrap: wrap;
+}
+
+
+
 
 .card{
     display: flex;
@@ -19,4 +101,14 @@
 .Boton {
     text-align: center;
     margin: 10px auto;
+}
+.Rick-todos{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+.Personajes{
+    border-radius: 1rem;
+    background-color: whitesmoke;
+    padding-block: 1rem;
 }

@@ -9,10 +9,45 @@
 </head>
 <body>
     <header class="nav">
-        <img src="./Multimedia/logo.png" alt="logonav">
+        <img src="./Multimedia/logo.png" alt="logonav" class="logoheader">
+        <ul class="nav-list">
+            <li class="nav-episodios"><button class="btn btn-header" id="Ver-todos-los-personajes">Ver todos los personajes</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Pilot">Piloto</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Lawnmower Dog">Lawnmower Dog</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Anatomy Park">Anatomy Park</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="M. Night Shaym-Aliens!">M. Night Shaym-Aliens!</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Meeseeks and Destroy">Meeseeks and Destroy</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Rick Potion #9">Rick Potion #9</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Raising Gazorpazorp">Raising Gazorpazorp</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Rixty Minutes">Rixty Minutes</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Something Ricked This Way Comes">Something Ricked This Way Comes</button></li>
+            <li class="nav-episodios"><button class="btn btn-header" id="Close Rick-counters of the Rick Kind">Close Rick-counters of the Rick Kind</button></li>
+            </ul>
     </header>
-    <div id="container"></div>
-    <script src="./js/habitaciones.js"></script>
+
+    <main>
+        <div id="todos">
+            <div class="Rick-todos" id="listaPersonajes">
+                <div class="Personajes">
+                    <div class="personaje-imagen">
+                        <img src="https://rickandmortyapi.com/api/character/avatar/1.jpeg" alt="Rick">
+                    </div>
+                    <div class="Personaje-info">
+                        <div class="nombre-contenedor">
+                            <p class="Personaje-id">001</p>
+                            <h2 class="Personaje-nombre">Rick Sanchez</h2>
+                        </div>
+                    <div class="personaje-status">Vivo</div>
+                    <div class="Personaje-location">Citadel of Ricks</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+
+
+    </main>
     <script src="js/main.js"></script>
 </body>
 </html>
