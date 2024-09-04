@@ -1,139 +1,163 @@
-const main = document.getElementById("container");
+const main = document.getElementById("main");
+const listaPersonajes = document.getElementById("listaPersonajes");
+let URLimg = "https://rickandmortyapi.com/api/character/avatar/";
 
-
-let Reserva;
-
-if(localStorage.getItem("Reserva")){
-    Reserva = JSON.parse(localStorage.getItem("Reserva"));
-} else {
-    Reserva = [];
-};
-
-Habitacion.forEach(el => CrearCard(el));
-
-function agregarAlCarrito(Habitacion){
-
-
-    if(Reserva.some(el => el.id === Habitacion.id)){
-        const HabitacionesIndex = Reserva.findIndex(el => el.id === Habitacion.id);
-        Reserva[HabitacionesIndex].cantidad += 1;
-
-    } else {
-        const nuevaReserva = {
-            id: Habitacion.id,
-            nombre: Habitacion.nombre,
-            precio: Habitacion.precio,
-            imagen: Habitacion.imagen,
-            cantidad: 1
-        };
-        Reserva.push(nuevaReserva);
-    }
-    localStorage.setItem("Reserva", JSON.stringify(Reserva));
-    SeAgregoAlCarrito(Habitacion.nombre)
-
-}
-function SeAgregoAlCarrito(nombre){
-    Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Tu Reserva de " + nombre + " fue confirmada",
-        showConfirmButton: false,
-        timer: 1500
-      });
+fetch("https://rickandmortyapi.com/api/character")
+.then(response => response.json())
+.then(data => {
+    const arrayRickymorty = data.results;
+    arrayRickymorty.forEach((el) =>
+    CrearCard(el) );
+})
+let Eliminados;
+if(localStorage.getItem("Eliminados")){
+    Eliminados = JSON.parse(localStorage.getItem("Eliminados"))
+} else{
+    Eliminados = [];
 }
 
-function CrearCard(Habitacion){
+
+
+function CrearCard(Personaje){
+    const Personajescard = document.createElement("div")
+    Personajescard.className = "Personajes"
+    listaPersonajes.append(Personajescard)
+
+    const PersonajeImagen = document.createElement("div")
+    PersonajeImagen.className = "personaje-imagen"
+    const Imagencard = document.createElement("img")
+    Imagencard.src =  URLimg + Personaje.id + ".jpeg";
+    Personajescard.append(PersonajeImagen)
+    PersonajeImagen.append(Imagencard)
+
+    const PersonajeInfo = document.createElement("div")
+    PersonajeInfo.className = "personaje-info"
+    Personajescard.append(PersonajeInfo)
+
+    const PersonajeStatus = document.createElement("div")
+    PersonajeStatus.className = "personaje-status"
+    PersonajeStatus.innerText = Personaje.status
+    Personajescard.append(PersonajeStatus)
+
+    const PersonajeLocation = document.createElement("div")
+    PersonajeLocation.className = "personaje-location"
+    Personajescard.append(PersonajeLocation)
     
-    const card = document.createElement("div");
-    card.className = "card";
-    const Nombre = document.createElement("h3");
-    Nombre.innerText = Habitacion.nombre;
-    const Precio = document.createElement("p")
-    Precio.innerText = Habitacion.precio;
-    const Imagen = document.createElement("img")
-    Imagen.className = "Imagencard";
-    Imagen.src = Habitacion.imagen;
+    const NombreContenedor = document.createElement("div")
+    NombreContenedor.className = "nombre-contenedor"
+    PersonajeInfo.append(NombreContenedor)
+
+    const personajeid = document.createElement("p")
+    personajeid.className = "Personaje-id"
+    personajeid.innerText = Personaje.id
+    const personajeNombre = document.createElement("h2")
+    personajeNombre.className = "Personaje-nombre"
+    personajeNombre.innerText = Personaje.name
+    NombreContenedor.append(personajeid,personajeNombre)
+
+
     const boton = document.createElement("button");
-    boton.innerText = "Reservar";
-    boton.onclick = () => agregarAlCarrito(Habitacion);
+    boton.innerText = "Eliminar";
+    boton.className = "btn-eliminar"
+    boton.onclick = () => Eliminacion(Personaje);
+    Personajescard.append(boton)
     
-
-    card.append(Nombre);
-    card.append(Precio);
-    card.append(Imagen);
-    card.append(boton)
-    main.append(card);
-    
-};
-
-const botonMostrar = document.createElement("button");
-botonMostrar.innerText = "Mostrar Reserva";
-botonMostrar.className = "Boton"
-botonMostrar.addEventListener("click", () => {
-    MostrarReserva()
-});
-
-main.append(botonMostrar);
-localStorage.setItem("Reservaciones", JSON.stringify(Reserva));
-function MostrarReserva(){
-    Swal.fire({
-        title: "Habitaciones Reservadas",
-        text: localStorage.getItem("Reservaciones"),
-        icon: "success"
-      });
+    const botonMostrar = document.getElementById("BotonMostrar");
+    botonMostrar.addEventListener("click", () =>{
+    MostrarEliminados(Personaje)})
+    const botoneliminartodo = document.getElementById("BotonEliminar");
+    botoneliminartodo.addEventListener("click", () => {
+    Eliminartodo()})
 }
 
+   
 
+function Eliminartodo(){
+        Swal.fire({
+            title: "Estas seguro?",
+            text: "No hay vuelta atras!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, Revivelos"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Revivaaaaan",
+                text: "Reviviste a los Eliminados.",
+                icon: "success"
+              });
+              Eliminados = [];
+              localStorage.setItem("Eliminados", JSON.stringify(Eliminados))
+            }
+          });  
+    }
 
-const botonLimpiar = document.createElement("button");
-botonLimpiar.className = "Boton"
-botonLimpiar.innerText = "Cancelar Reservas";
-botonLimpiar.addEventListener("click", () => {
-    Presionarlimmpiar()
-});
-
-
-function Presionarlimmpiar () {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your file has been deleted.",
-            icon: "success"
+function Eliminacion(Personaje){
+    if(Eliminados.some(el => el.id === Personaje.id)){
+        Swal.fire({
+            position: "top-end",
+            icon: "info",
+            title:  Personaje.name + " Ya no esta con nosotros 😢",
+            showConfirmButton: false,
+            timer: 1500
           });
-          Reserva = [];
-          localStorage.setItem("Reserva", JSON.stringify(Reserva))
-        }
-      });
+    }else {
+        const eliminar = {
+            id: Personaje.id,
+            name: Personaje.name,
+            status: "Dead",
+            imagen: URLimg + Personaje.id + ".jpeg",
+        };
+        Eliminados.push(eliminar)
+        localStorage.setItem("Personaje", JSON.stringify(Personaje));
+        SeAgregoFantasma(Personaje)
+    }
     
 }
-main.append(botonLimpiar);
 
-const botonLimpiar1 = document.createElement("button");
-botonLimpiar1.className = "Boton"
-botonLimpiar1.innerText = "Eliminar Ultima Reserva";
-botonLimpiar1.addEventListener("click", () => {
-    PresionarLimpiar1()
-});
-function PresionarLimpiar1(){
-    Swal.fire({
-        title: "Ultima Reserva Borrada",
-        text: "Satisfactoriamente",
-        icon: "success"
-      });
-    Reserva.shift();
-    localStorage.setItem("Reserva", JSON.stringify(Reserva))
+function SeAgregoFantasma (Personaje){
+    if(Personaje.status == "Dead"){
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title:  Personaje.name + "Dejalo ya esta muerto",
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
+    else{
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title:  Personaje.name + " fue eliminado",
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
 }
 
-main.append(botonLimpiar1);
+
+function MostrarEliminados(Personaje){
+    Swal.fire({
+        title: "Personajes Eliminados",
+        text: Mensaje(Eliminados,Personaje),
+        icon: "success"
+      });
+}
+
+function Mensaje(Personaje){
+    let personajeEliminado = "Eliminaste a:"
+    Personaje.forEach((Personaje) => {
+        personajeEliminado += ` ${Personaje.name} - \n`
+    })
+    return personajeEliminado
+
+}
+
+
+
   
    
 

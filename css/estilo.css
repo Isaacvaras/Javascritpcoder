@@ -10,7 +10,8 @@ button {
     border: 0;
     border-radius: 0;
 }
-ul{
+
+li{
     list-style-type: none;
 }
 body {
@@ -27,16 +28,13 @@ header{
     align-items: flex-start;
     padding-inline: 1rem;
 }
-.nav-list{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+.titulo{
+    text-align: center;
 }
 .logoheader{
     width: 50%;
 }
-.btn-header {
+.btn-eliminar {
     background-color: rgb(254, 254, 254);
     padding: 0.5rem;
     cursor: pointer;
@@ -45,7 +43,7 @@ header{
     font-weight: 600;
     transition: 1s;
 }
-.btn-header:hover{
+.btn-eliminar:hover{
     background-color: green;
     color: black;
     transform: scale(1.4);
@@ -63,10 +61,11 @@ main{
     width: 100%;
     max-width: 15rem;
 }
+
 .Personaje-info{
     display: flex;
     flex-direction: column;
-    gap: 0.5 rem;
+    gap: 0.5rem;
     padding-inline: 2rem;
     align-items: center;
     text-align: center;
@@ -74,33 +73,12 @@ main{
 .nombre-contenedor{
     display: flex;
     align-items: center;
-    column-gap: 2rem;
+    column-gap: 5rem;
     flex-wrap: wrap;
+    margin: 10px;
 }
-
-
-
-
-.card{
-    display: flex;
-    width: 100%;
-    height: 60%;
-    border: solid black;
-    margin: 20px auto;
-    justify-content: space-between;
-    align-items: center;
-    background-color: beige;
-}
-.container{
-    display: flex;
-}
-.Imagencard{
-    width: 200px;
-    height: 200px;
-}
-.Boton {
-    text-align: center;
-    margin: 10px auto;
+.personaje-status{
+    margin: 10px;
 }
 .Rick-todos{
     display: grid;
